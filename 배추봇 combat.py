@@ -3,6 +3,7 @@ import time
 
 
 def combat():
+    #combat 함수는 2018년 02월 11일에 완성됨 with 아빠.
     enemylist = ["Ogre","Mage"]
     
     global ogrehp
@@ -26,11 +27,19 @@ def combat():
     #mypethp is MyPet's HP
     
     global mypetap 
-    mypetap = 2
+    mypetap = 4
     #mypetap is MyPet's AP (Attack Point)
 
     global attackedtime
-    attackedtime = 0
+    attackedtime = 1
+
+    global truedamageogre
+    truedamageogre = mypetap * attackedtime
+
+    global truedamagemypet
+    truedamagemypet = ogreap * attackedtime
+
+    
 
 
     enemy = random.choice(enemylist)
@@ -45,22 +54,21 @@ def combat():
         time.sleep(0.5)
         print(enemy,"'s ap is",mageap,'.')
 
-    while ogrehp > 1 or mypethp > 1:
-
-            truedamageogre = mypetap * attackedtime
-            truedamagemypet = ogreap * attackedtime
+    while ogrehp-truedamagemypet > 0 and mypethp-truedamageogre > 0:
             print("Martin hit",enemy,'!')
             time.sleep(0.75)
-            print("Current Ogre's HP:",ogrehp-truedamagemypet)
+            ogrehp = ogrehp-truedamagemypet
+            print("Current Ogre's HP:",ogrehp)
             time.sleep(0.75)
             print(enemy,"hit Martin!")
             time.sleep(0.75)
-            print("Current Mypet's HP:",mypethp-truedamageogre)
+            mypethp = mypethp-truedamageogre
+            print("Current Mypet's HP:",mypethp)
             time.sleep(0.75)
-            attackedtime + 1
-            
             if ogrehp < 1:
                 print("You bet",enemy,"!")
             if mypethp < 1:
                 print("You lose!")
             
+    #else:
+    #    print("Whattttttttttttttttttttttt?????????????????????")
